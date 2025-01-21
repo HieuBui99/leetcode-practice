@@ -5,4 +5,18 @@ class TreeNode:
         self.right = right
 
 def is_balanced(root: TreeNode) -> bool:
-    pass
+    res = True
+    def dfs(curr):
+        nonlocal res
+        if not curr: 
+            return 0
+
+        left = dfs(curr.left)
+        right = dfs(curr.right)
+        if abs(left - right) > 1:
+            res = False
+        
+        return 1 + max(left, right)
+    
+    dfs(root)
+    return res
